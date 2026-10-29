@@ -1,4 +1,4 @@
-name: Debug wheels
+name: Spec27 backport wheels
 
 on:
   workflow_dispatch:

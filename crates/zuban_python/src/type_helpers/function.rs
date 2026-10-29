@@ -1664,7 +1664,6 @@ impl<'db: 'a + 'class, 'a, 'class> Function<'a, 'class> {
         );
         callable.type_vars = type_vars;
         if matches!(options.first_param, FirstParamProperties::Skip { .. }) {
-            callable.receiver_bound = true;
             // Now the first param was removed, so everything is considered as having an
             // annotation (even if it's an implicit Any).
             callable

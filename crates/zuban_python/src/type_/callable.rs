@@ -396,6 +396,8 @@ fn any_for_each_type_like<'x>(
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub(crate) struct CallableContent {
+    // Receiver consumption survives substitutions and aliases; never bind it twice.
+    pub receiver_bound: bool,
     pub name: Option<DbString>,
     pub class_name: Option<StringSlice>,
     pub defined_at: PointLink,
@@ -437,6 +439,7 @@ impl CallableContent {
         return_type: Type,
     ) -> Self {
         Self {
+            receiver_bound: false,
             name,
             class_name,
             defined_at,
@@ -485,6 +488,7 @@ impl CallableContent {
 
     fn new_any_internal(defined_at: PointLink, type_vars: TypeVarLikes, cause: AnyCause) -> Self {
         Self {
+            receiver_bound: false,
             name: None,
             class_name: None,
             defined_at,
